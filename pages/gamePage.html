@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Description</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" type="text/css" href="./styles/gamePage.css">
+    <link rel="icon" href="../images/icons/game-icon.png" type="image/x-icon">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="../index.html"><img src="../images/steam.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./store.html">Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="game-description">
+            <h1 id="game-title">Game Title</h1>
+            <div class="game-info">
+                <div class="game-image">
+                    <img id="game-image" src="../images/kingdom.jpg" alt="Game Image">
+                </div>
+                <div class="game-details">
+                    <h2>About the Game</h2>
+                    <p id="game-about">This is an exciting game where you embark on an epic adventure. Fight enemies, solve puzzles, and explore vast worlds. With stunning graphics and immersive gameplay, it's a must-play for all gamers. Experience thrilling challenges and unlock new levels as you progress through the story.</p>
+                    <h2>Key Features</h2>
+                    <ul id="game-features">
+                        <li>Feature 1</li>
+                        <li>Feature 2</li>
+                        <li>Feature 3</li>
+                    </ul>
+                    <h2>System Requirements</h2>
+                    <ul id="game-requirements">
+                        <li>Operating System: Windows 10</li>
+                        <li>Processor: Intel Core i5-6500</li>
+                        <li>Memory: 8 GB RAM</li>
+                        <li>Graphics: NVIDIA GTX 970</li>
+                        <li>Storage: 50 GB available space</li>
+                    </ul>
+                    <button onclick="mustLogin()"  class="add-to-cart">Add to Cart</button>
+                    <button onclick="shareGame()" class="btn btn-secondary">Share Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            <h3>Comments</h3>
+            <div id="comments-list"></div>
+            <div class="comment-form">
+                <textarea id="comment-text" placeholder="Write a comment..." rows="3"></textarea>
+                <button onclick="postComment()" class="btn btn-primary">Post Comment</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5>Explore</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./store.html">Store</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Follow</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.facebook.com/">Facebook</a></li>
+                        <li><a href="https://twitter.com/i/flow/login?redirect_after_login=%2Flogin">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/feed/">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Subscribe</h5>
+                    <p>Subscribe to our newsletter to get updates.</p>
+                    <form action="./thanx.html">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email address" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2023 My Website. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../JsScripts/comment.js"></script>
+<script>
+    // Get gameId from URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameId = parseInt(urlParams.get('gameId'));
+
+    // Load games data from localStorage (same as store.js)
+    let itemsData = JSON.parse(localStorage.getItem("itemsData")) || [];
+    if (itemsData.length === 0) {
+      // Fallback default games if localStorage is empty
+      itemsData = [
+        {
+          id: 1,
+          name: "RED DEAD II REDEMPTION",
+          price: 130,
+          category: "Category 1",
+          image: "../images/redead.jpg",
+        },
+        {
+          id: 2,
+          name: "Galactic Invaders",
+          price: 50,
+          category: "Category 1",
+          image: "../images/galactic.jpeg",
+        },
+        {
+          id: 3,
+          name: "Grand Theft Auto 6",
+          price: 70,
+          category: "Category 1",
+          image: "../images/Grand-Theft-Auto-6.jpg",
+        },
+        {
+          id: 4,
+          name: "Block Buster",
+          price: 40,
+          category: "Category 2",
+          image: "../images/block.jpeg",
+        },
+        {
+          id: 5,
+          name: "Shadow Ninja",
+          price: 60,
+          category: "Category 2",
+          image: "../images/shadow.jpeg",
+        },
+        {
+          id: 6,
+          name: "Fifa 2023",
+          price: 80,
+          category: "Category 3",
+          image: "../images/fifa.jpeg",
+        },
+      ];
+    }
+
+    // Find the game by ID
+    const game = itemsData.find(item => item.id === gameId);
+
+    if (game) {
+        // Populate the page with game details
+        document.getElementById('game-title').textContent = game.name;
+        document.getElementById('game-image').src = game.image;
+        document.getElementById('game-image').alt = game.name;
+        // About the Game, Key Features, and System Requirements remain the same as specified
+    } else {
+        // Fallback if game not found
+        document.getElementById('game-title').textContent = 'Game Not Found';
+    }
+
+function mustLogin()
+{
+  alert("You have to login first. You can create an account if it's your first time.");
+  location.replace('./Login.html')
+}
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <title>Profile</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../pages/styles/profile.css">
+    <link rel="icon" href="../images/icons/game-icon.png" type="image/x-icon">
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="../index.html"><img src="../images/steam.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./store.html">Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="profile-container">
+        <div class="profile">
+            <div class="sign-out-div">
+                <button class="sign-out-btn" onclick="localStorageClean()">Sign Out</button>
+                    <!-- <a href="./setings.html"> <i id="settings-icon" class="fa fa-cog"></i></a> -->
+                </div>
+            <div class="profile-header">
+                <div class="profile-info">
+                    <h1 class="name" id="Name1"></h1>
+                    <h3 class="FamilyName" id="Email1"></h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget nisi et velit fringilla
+                        consequat vel ut urna.</p>
+                </div>
+               
+             <div class="img-container">
+
+                 <div id="profileImg" onclick="showImg()"></div>
+                 <label for="imageInput" id="editIcon"><i class="fas fa-edit"></i></label>
+                 <input type="file" id="imageInput">
+                 <button id="img-button" onclick="changeProfileImage()">Change Image</button>
+             </div>
+               
+            </div>
+       
+            <div class="game-stats">
+                <div class="stat">
+                    <h4>Games Owned</h4>
+                    <p>50</p>
+                </div>
+                <div class="stat">
+                    <h4>Achievements</h4>
+                    <p>800</p>
+                </div>
+                <div class="stat">
+                    <h4>Hours Played</h4>
+                    <p>1000</p>
+                </div>
+            </div>
+            <div class="recent-activity">
+                <h2>Recent Activity</h2>
+                <div class="activity-item">
+                    <span class="activity-time">2 hours ago</span>
+                    <p>Purchased a new game: <strong>Game Title</strong></p>
+                </div>
+                <div class="activity-item">
+                    <span class="activity-time">3 days ago</span>
+                    <p>Unlocked an achievement: <strong>Achievement Name</strong></p>
+                </div>
+            </div>
+            <div class="shared-games">
+                <h2>Shared Games</h2>
+                <div id="shared-games-list"></div>
+            </div>
+            <div class="card">
+                     <h2>User info </h2>
+                 <div class="card-body">
+                     <button class="saveBtn" onclick="saveDetails()">Save Changes</button>
+                <button id="editBtn" onclick="editingDetails()" >Edit</button>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>:</td>
+                            <td id="Name"  contenteditable="false" ></td>
+                            
+                        </tr>
+                        <tr>
+                            <td>First Name</td>
+                            <td>:</td>
+                            <td id="userFirstName"  contenteditable="false"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Last Name</td>
+                            <td>:</td>
+                            <td id="userLastName"  contenteditable="false"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>:</td>
+                            <td id="pw" contenteditable="false"></td>
+                            
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>:</td>
+                            <td id="Email" contenteditable="false"></td>
+                        </tr>
+
+                        <tr>
+                            <td>Date Of Birth</td>
+                            <td>:</td>
+                            <td id="DateOfBirth" contenteditable="false"></td>
+                        </tr>
+
+                        <tr>
+                            <td>City</td>
+                            <td>:</td>
+                            <td id="city" contenteditable="false"></td>
+                        </tr>
+
+                        
+                        <tr>
+                            <td>Post Box</td>
+                            <td>:</td>
+                            <td id="postBox"contenteditable="false"></td>
+                        </tr>
+                    </tbody>
+            </table>
+       
+            </div>
+        </div>
+    </div>
+   </div>
+    
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5>Explore</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./store.html">Store</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Follow</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.facebook.com/">Facebook</a></li>
+                        <li><a href="https://twitter.com/i/flow/login?redirect_after_login=%2Flogin">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/feed/">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Subscribe</h5>
+                    <p>Subscribe to our newsletter to get updates.</p>
+                    <form action="./thanx.html">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email address" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2023 My Website. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../JsScripts/profile.js"></script>
+<script>
+    // Handle query parameter for viewing other users' profiles
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('user');
+    if (userId) {
+        // Load profile for specific user
+        loadUserProfile(userId);
+    } else {
+        // Load current user's profile
+        loadCurrentUserProfile();
+    }
+
+    function loadUserProfile(userId) {
+        // Fetch user data from API
+        fetch(`/api/users/${userId}`)
+            .then(response => response.json())
+            .then(user => {
+                // Populate profile with user data
+                document.getElementById('Name1').textContent = user.userName;
+                document.getElementById('Email1').textContent = user.email;
+                // Hide edit buttons or make read-only
+                document.querySelectorAll('td[contenteditable]').forEach(td => {
+                    td.contentEditable = false;
+                });
+                document.getElementById('playGame').style.display = 'none';
+                document.getElementById('sign-out-div').style.display = 'none';
+            })
+            .catch(err => console.error('Failed to load user profile', err));
+    }
+
+    function loadCurrentUserProfile() {
+        // Existing profile loading logic
+        // ... (from profile.js)
+    }
+</script>
+<script>
+    // Load shared games
+    function loadSharedGames() {
+        fetch('/api/shared_games') // Assuming we add this endpoint
+            .then(response => response.json())
+            .then(sharedGames => {
+                const sharedGamesList = document.getElementById('shared-games-list');
+                sharedGamesList.innerHTML = '';
+                sharedGames.forEach(shared => {
+                    const sharedDiv = document.createElement('div');
+                    sharedDiv.className = 'activity-item';
+                    sharedDiv.innerHTML = `
+                        <p>Shared <strong>${shared.game_name}</strong> with ${shared.shared_with_name}</p>
+                        <small>${new Date(shared.timestamp).toLocaleString()}</small>
+                    `;
+                    sharedGamesList.appendChild(sharedDiv);
+                });
+            })
+            .catch(error => console.error('Error loading shared games:', error));
+    }
+
+    document.addEventListener('DOMContentLoaded', loadSharedGames);
+</script>
+</body>
+
+</html>

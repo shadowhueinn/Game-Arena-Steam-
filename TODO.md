@@ -1,0 +1,6 @@
+- [x] Remove Flappy Bird and Anarkid Retro game cards from index.html
+- [x] Update styles/main.css for overall UI improvements (background, colors, fonts, spacing)
+- [x] Update styles/header.css for header background and styling
+- [x] Update styles/navbar.css for navbar improvements
+- [x] Update styles/footer.css for footer enhancements
+- [x] Test the changes by running the app

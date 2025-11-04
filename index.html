@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Arena</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="icon" href="./images/icons/game-icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./pages/styles/adds.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="./index.html">Game Arena</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./pages/about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./pages/store.html">Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./pages/library.html">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./pages/services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./pages/login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <header class="jumbotron text-center">
+        <video autoplay muted loop id="video-bg">
+            <source src="images/stVed.mp4" type="video/mp4">
+        </video>
+        <div class="jumbotron-content">
+
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <section>
+
+
+                    <div id="gamesCarousel" class="carousel slide mx-auto" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#gamesCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#gamesCarousel" data-slide-to="1"></li>
+                            <li data-target="#gamesCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner text-center">
+                            <div class="carousel-item active">
+                                <a href="./pages/store.html">
+                                    <img class="d-block mx-auto" src="images/action.jpg" alt="Action Games">
+                                </a>
+                                <div class="carousel-caption">
+                                    <h3>Action Games</h3>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="./pages/store.html">
+                                    <img class="d-block mx-auto" src="images/adventure.jpg" alt="Adventure Games">
+                                </a>
+                                <div class="carousel-caption">
+                                    <h3>Adventure Games</h3>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <a href="./pages/store.html">
+                                    <img class="d-block mx-auto" src="images/racing.jpg" alt="Racing Games">
+                                </a>
+                                <div class="carousel-caption">
+                                    <h3>Racing Games</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#gamesCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#gamesCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </section>
+            </div>
+            <div>
+                <section id="retro ">
+                    <h3>Popular Retro Games</h3>
+                    <div class="row">
+                        <!-- Games removed as per request -->
+                    </div>
+                </section>
+                <div id="slider-container"></div>
+
+                <section>
+
+                    <h3 id="list-title">Play Free Retro Online Games</h3>
+                    <div class="games-list">
+                        <div class="game-card">
+                            <img src="images/kingdom.jpg" alt="Game 1">
+                            <h3>Kingdom Quest</h3>
+                            <p>Join the adventure in this retro platformer and defeat the evil monsters to save the
+                                kingdom.</p>
+                            <a href="./pages/gamePage.html" class="btn btn-primary">Play Now</a>
+                        </div>
+                        <div class="game-card">
+                            <img src="images/galactic.jpeg" alt="Game 2">
+                            <h3>Galactic Invaders</h3>
+                            <p>Take control of a spaceship and engage in an epic space battle against alien invaders in
+                                this classic arcade game.</p>
+                            <a href="./pages/gamePage.html" class="btn btn-primary">Play Now</a>
+                        </div>
+                        <div class="game-card">
+                            <img src="images/Grand-Theft-Auto-6.jpg" alt="Game 3">
+                            <h3>Grand Theft Auto 6</h3>
+                            <p> Play as a brave knight and embark on a quest to rescue the princess from the clutches of
+                                the wicked sorcerer.</p>
+                            <a href="./pages/gamePage.html" class="btn btn-primary">Play Now</a>
+                        </div>
+                        <div class="game-card">
+                            <img src="images/block.jpeg" alt="Game 4">
+                            <h3>Block Buster</h3>
+                            <p>Test your puzzle-solving skills in this challenging game where you need to arrange
+                                falling blocks to clear lines and score points.</p>
+                            <a href="./pages/gamePage.html" class="btn btn-primary">Play Now</a>
+                        </div>
+                        <div class="game-card">
+                            <img src="images/shadow.jpeg" alt="Game 5">
+                            <h3>Shadow Ninja</h3>
+                            <p> Step into the shoes of a skilled ninja and navigate through dangerous obstacles while
+                                defeating enemies along the way.</p>
+                            <a href="./pages/gamePage.html" class="btn btn-primary">Play Now</a>
+                        </div>
+                        <div class="game-card">
+                            <img src="images/fifa.jpeg" alt="Game 6">
+                            <h3>Fifa 2023</h3>
+                            <p>Immerse yourself in an exciting racing experience as you speed through different tracks
+                                and compete for the championship.</p>
+                            <a href="./pages/gamePage.html" class="btn btn-primary">Play Now</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Section: Contact -->
+        <section id="contact" class="section section-contact scrollspy">
+            <h1>Contact Us</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card-panel teal white-text center">
+                            <h5>Ask Anything</h5>
+                            <p>Have questions about our games, services, or need help with your account? Feel free to reach out to us. Our team is here to assist you with any inquiries, technical support, or feedback you might have. We're committed to providing the best gaming experience possible.</p>
+                        </div>
+                        <ul class="collection with-header">
+                            <li class="collection-header">
+                                <h4>Location</h4>
+                            </li>
+                            <li class="collection-item">Phillipines, Cebu</li>
+                            <li class="collection-item">555 SanFernando, talisay 33</li>
+                            <li class="collection-item">Cebu city, 55555</li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m6">
+                        <div class="card-panel grey lighten-3">
+                            <h5>Please fill out this form</h5>
+                            <form action="./pages/thanx.html">
+                                <div class="input-field">
+                                    <label for="name">Name:</label>
+                                    <input type="text" placeholder="Name" id="name" required>
+                                </div>
+                                <div class="input-field">
+                                    <label for="email">Email:</label>
+                                    <input type="email" placeholder="Email" id="email" required>
+                                </div>
+                                <div class="input-field">
+                                    <label for="phone">Phone:</label>
+                                    <input type="text" placeholder="Phone" id="phone" required>
+                                </div>
+                                <div class="input-field">
+                                    <label for="message">Message:</label>
+                                    <textarea class="materialize-textarea" placeholder="Enter Message" id="message"
+                                        required></textarea>
+                                </div>
+                                <input type="submit" value="Submit" class="btn">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <footer class="footer bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h5>Explore</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="./index.html">Home</a></li>
+                            <li><a href="./pages/about.html">About</a></li>
+                            <li><a href="./pages/store.html">Store</a></li>
+                            <li><a href="./pages/services.html">Services</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5>Follow</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="https://www.facebook.com/">Facebook</a></li>
+                            <li><a href="https://twitter.com/i/flow/login?redirect_after_login=%2Flogin">Twitter</a>
+                            </li>
+                            <li><a href="https://www.instagram.com/">Instagram</a></li>
+                            <li><a href="https://www.linkedin.com/feed/">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5>Subscribe</h5>
+                        <p>Subscribe to our newsletter to get updates.</p>
+                        <form action="./pages/thanx.html">
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email address" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <p>&copy; 2025 My Website. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+        <!--
+        loading function
+  <div class="loader-container">
+            <img src="./images/loading2.gif" alt="">
+           </div>
+      -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="./JsScripts/adds.js"></scriptsrc>
+    </body>
+
+</html>

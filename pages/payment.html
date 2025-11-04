@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Payment</title>
+  <link rel="stylesheet" href="../styles/navbar.css">
+  <link rel="stylesheet" href="../styles/footer.css">
+  <link rel="stylesheet" href="../pages/styles/payment.css">
+  <script src="../JsScripts/auth.js"></script>
+  <script src="../JsScripts/payment.js" defer></script>
+  <link rel="icon" href="../images/icons/game-icon.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="../index.html"><img src="../images/steam.png" alt=""></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./about.html">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./store.html">Store</a>
+        </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./login.html">Login</a>
+                </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="row divPay">
+    <div class="column c1">
+      <div id="resdiv"></div>
+
+      <h2 style="margin-bottom: 10px;">Summary</h2>
+
+
+      <div class="totalTxt">
+
+        <h3 style="color: #a9abae" id="total"></h3>
+      </div>
+
+    </div>
+    <div class="column c2">
+
+      <h2 style="margin-bottom: 10px;">Payment</h2>
+
+      <div class="payment-options">
+        <h3>Select Payment Method</h3>
+        <div class="payment-method">
+          <input type="radio" id="gcash" name="paymentMethod" value="gcash" checked>
+          <label for="gcash">GCash</label>
+          <p>Pay using GCash. Enter your GCash account details below.</p>
+          <div id="gcash-fields" class="payment-fields">
+            <div style="width: 100%;margin: auto;">
+              <div style="width: 50%;display: inline-block;"><b>GCash Number</b></div>
+              <input type="text" id="gcashNumber" placeholder="09XXXXXXXXX" style="width: 100%" maxlength="11">
+            </div>
+            <div style="width: 100%;margin: auto;">
+              <div style="width: 50%;display: inline-block;"><b>Amount</b></div>
+              <input type="text" id="gcashAmount" placeholder="Total Amount" style="width: 100%" readonly>
+            </div>
+          </div>
+        </div>
+        <div class="payment-method">
+          <input type="radio" id="creditcard" name="paymentMethod" value="creditcard">
+          <label for="creditcard">Credit Card</label>
+          <p>Pay using Credit Card. Enter your card details below.</p>
+          <div id="creditcard-fields" class="payment-fields" style="display: none;">
+            <div class="card" id="divCard">
+              <div class='card-content'>
+                <img style="display: none" id="imgFranchise" class="logoFranquicia">
+                <div class="infoTarjeta">
+                  <h5>Card Number</h5>
+                  <h6 id="cardNumber">0000 0000 0000 0000</h6>
+                  <h5>Expiration<span class="cvvStyle">CVV</span></h5>
+                  <h6><span id="cardMonth">00</span> / <span id="cardYear">0000</span><span class="cvvStyle2"
+                      id="cardCVV">000</span></h6>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <div style="width: 100%;margin: auto;">
+              <div style="width: 50%;display: inline-block;"><b>Cardholder</b></div>
+              <input type="text" id="pagarTarjetaTit" placeholder="john doe" maxlength="16" style="width: 100%">
+            </div>
+
+            <div style="width: 100%;margin: auto;">
+              <div style="width: 50%;display: inline-block;"><b>Card Number</b></div>
+              <input type="text" id="pagarTarjetaNum" placeholder="0000-0000-0000-0000" style="width: 100%" maxlength="16"
+                oninput="showCN()">
+            </div>
+
+            <div style="width: 100%;margin: auto;">
+              <div style="width: 50%;display: inline-block;"><b>Expiration</b></div>
+
+              <div class="row">
+                <div class="column">
+                  <div style="width: 100%;display: inline-block;"><b>Month</b></div>
+                  <input type="number" id="pagarTarjetaMes" placeholder="03" min="01" max="12" style="width: 80%"
+                    oninput="showCE()">
+                </div>
+                <div class="column">
+                  <div style="width: 100%;display: inline-block;"><b>Year</b></div>
+                  <input type="number" id="pagarTarjetaAno" placeholder="2024" min="2020" max="2030" style="width: 80%"
+                    oninput="showCE()">
+                </div>
+              </div>
+            </div>
+
+            <div style="width: 100%;margin: auto;">
+              <div style="width: 50%;display: inline-block;"><b>CVV</b></div>
+              <input type="number" id="pagarTarjetaCVV" placeholder="000" min="000" max="999" style="width: 50%"
+                oninput="showCV()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form action="./thanx.html">
+        <button title="Make payment">Make payment</button>
+      </form>
+
+    </div>
+  </div>
+
+
+  <footer class="footer bg-dark text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h5>Explore</h5>
+          <ul class="list-unstyled">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./store.html">Store</a></li>
+            <li><a href="./services.html">Services</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5>Follow</h5>
+          <ul class="list-unstyled">
+            <li><a href="https://www.facebook.com/">Facebook</a></li>
+            <li><a href="https://twitter.com/i/flow/login?redirect_after_login=%2Flogin">Twitter</a></li>
+            <li><a href="https://www.instagram.com/">Instagram</a></li>
+            <li><a href="https://www.linkedin.com/feed/">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5>Subscribe</h5>
+          <p>Subscribe to our newsletter to get updates.</p>
+          <form action="./thanx.html">
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email address" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div class="text-center">
+        <p>&copy; 2025 My Website. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

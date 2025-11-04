@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Sign Up </title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../pages/styles/Siginup.css">
+    <script src="../JsScripts/auth.js"></script>
+    <script src="../JsScripts/signup.js" defer></script>
+    <link rel="icon" href="../images/icons/game-icon.png" type="image/x-icon">
+
+
+</head>
+
+<body>
+
+    <nav class=" navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="../index.html"><img src="../images/steam.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./store.html">Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="form-container">
+
+        <form name='form-login' id="form" class="signup-form" onsubmit="store(event)">
+            <h1>Create Your Game Arena Account</h1>
+            <input type="text" id="userName" placeholder="Username">
+            <input type="text" id="userFirstName" placeholder="First Name">
+            <input type="text" id="userLastName" placeholder="Last Name">
+            <input id="DateOfBirth" type='date' placeholder="Date Of Birth" min='1902-01-01' max='2023-07-14'></input>
+            <input type="email" id="email" placeholder="Email">
+
+            <input type="password" id="pw" placeholder="Password">
+            <input type="password" id="pw2" placeholder="confirm Password">
+            <input id="rgstr_btn" type="submit" value="Register">
+            <p class="login-link">Already have an account? <a href="./login.html">Sign in</a></p>
+            <!-- <ul class="helper-text">
+                <h3>Password:</h3>
+                <li class="length">Must be Maximum 12 characters long.</li>
+                <li class="length">Must be at least 7 characters long </li>
+                <li class="uppercase">Must contain an uppercase letter.</li>
+                <li class="lowercase">Must contain a lowercase letter.</li>
+                <li class="special">Must contain a special character.</li>
+                <li class="special">Must contain a number.</li>
+
+            </ul> -->
+        </form>
+    </div>
+    <footer class="footer bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5>Explore</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./store.html">Store</a></li>
+                        <li><a href="./services.html">Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Follow</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.facebook.com/">Facebook</a></li>
+                        <li><a href="https://twitter.com/i/flow/login?redirect_after_login=%2Flogin">Twitter</a></li>
+                        <li><a href="https://www.instagram.com/">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/feed/">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Subscribe</h5>
+                    <p>Subscribe to our newsletter to get updates.</p>
+                    <form action="./thanx.html">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Email address" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 My Website. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

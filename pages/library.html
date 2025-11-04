@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Library - Game Arena</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/library.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="../index.html">Game Arena</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main class="library-container">
+        <div class="library-header">
+            <h1>Your Game Library</h1>
+            <p>Manage your installed games and purchases</p>
+        </div>
+
+        <div class="library-content">
+            <div class="library-filters">
+                <button class="filter-btn active" data-filter="all">All Games</button>
+                <button class="filter-btn" data-filter="installed">Installed</button>
+                <button class="filter-btn" data-filter="not-installed">Not Installed</button>
+            </div>
+
+            <div class="games-grid" id="games-grid">
+                <!-- Games will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Game Install Modal -->
+    <div id="install-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Installing Game</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="install-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p id="progress-text">Preparing installation...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JsScripts/library.js"></script>
+    <script src="../JsScripts/auth.js"></script>
+</body>
+</html>

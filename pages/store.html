@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Store</title>
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="stylesheet" href="../pages/styles/store.css">
+    <link rel="icon" href="../images/icons/game-icon.png" type="image/x-icon">
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="../index.html"><img src="../images/steam.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./store.html">Store</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./services.html">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+
+        <div class="form-group">
+            <label for="category-select">Sort by Category:</label>
+            <select id="category-select" class="form-control">
+                <option value="">All</option>
+                <option value="Category 1">Action Games</option>
+                <option value="Category 2">Adventure Games</option>
+                <option value="Category 3">Racing Games</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="sort-select">Sort by Price:</label>
+            <select id="sort-select" class="form-control">
+                <option value="default">Default</option>
+                <option value="lowToHigh">Low to High</option>
+                <option value="highToLow">High to Low</option>
+            </select>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- Rest of the content -->
+                    <div class="row" id="items-container"></div>
+
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2 class="card-title">Shopping Cart</h2>
+                            <div class="cart-header">Items</div>
+                            <div id="cart-items" class="cart-items"></div>
+                            <div id="total-price" class="cart-total"></div>
+
+                            <div class="cart-buttons">
+                                <button id="empty-cart-btn" class="btn btn-danger">Empty Cart</button>
+                                <button id="checkout-btn" class="btn btn-success">Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h5>Explore</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="./about.html">About</a></li>
+                            <li><a href="./store.html">Store</a></li>
+                            <li><a href="./services.html">Services</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5>Follow</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="https://www.facebook.com/">Facebook</a></li>
+                            <li><a href="https://twitter.com/i/flow/login?redirect_after_login=%2Flogin">Twitter</a>
+                            </li>
+                            <li><a href="https://www.instagram.com/">Instagram</a></li>
+                            <li><a href="https://www.linkedin.com/feed/">LinkedIn</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h5>Subscribe</h5>
+                        <p>Subscribe to our newsletter to get updates.</p>
+                        <form action="./thanx.html">
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email address" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <p>&copy; 2025 My Website. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    <script src="../JsScripts/auth.js"></script>
+    <script src="../JsScripts/store.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
