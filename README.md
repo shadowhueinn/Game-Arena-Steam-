@@ -35,16 +35,6 @@ The Game Arena project can be used to browse games, view their details, and inte
 3. Use the search bar to find specific games based on titles or keywords.
 4. To create an account or log in, click on the "Sign Up" or "Log In" buttons respectively. Note that without a backend, the user authentication functionality will not be fully implemented.
 
-## Contributing
-
-Contributions are welcome! If you'd like to contribute to the project, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature`
-3. Make your changes and commit them: `git commit -m 'Add your feature'`
-4. Push the changes to your branch: `git push origin feature/your-feature`
-5. Submit a pull request explaining your changes.
-
 
 
 
