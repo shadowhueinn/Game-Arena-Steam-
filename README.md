@@ -18,13 +18,6 @@ This is a repository for the Game Arena project, a web application designed to e
 - **CSS**
 - **JavaScript**
 
-## Installation
-
-To set up the Game Arena project locally, follow these steps:
-
-1. Clone the repository: `git clone https://github.com/your-username/steam-clone.git`
-2. Navigate to the project directory: `cd steam-clone`
-3. Open the `index.html` file in your preferred web browser.
 
 ## Usage
 
