@@ -11,9 +11,6 @@ This is a repository for the Game Arena project, a web application designed to e
 - **Game Details**: View detailed information about each game, including descriptions, screenshots, and system requirements.
 - **User Reviews and Ratings**: Users can leave reviews and ratings for games they have played.
 
-## Online Website
-
-Click [here](https://precious-empanada-8f6ca9.netlify.app/) to view the online website.
 
 ## Technologies Used
 
@@ -48,13 +45,7 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
 4. Push the changes to your branch: `git push origin feature/your-feature`
 5. Submit a pull request explaining your changes.
 
-## License
 
-The Game Arena project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as per the license terms.
-
-## Contact
-
-If you have any questions, suggestions, or feedback, please feel free to contact us.
 
 
 Thank you for your interest in the Game Arena project! Happy gaming!
