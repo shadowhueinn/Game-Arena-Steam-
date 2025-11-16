@@ -1,0 +1,78 @@
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True
+api_admin_users called
+session: {'user_id': 6}
+'user_id' in session: True
+user_id: 6, user: <User 6>
+user.userName: admin
+is_admin_user(user): True

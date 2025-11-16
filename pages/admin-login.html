@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+    <link rel="icon" href="../images/icons/ic.png" type="image/x-icon">
+    <style>
+        :root {
+            --primary-color: #1f1f2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --text-color: #eaeaea;
+            --border-color: #e94560;
+        }
+
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container-login {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .login-card {
+            background-color: var(--secondary-color);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(233, 69, 96, 0.2);
+            width: 100%;
+            max-width: 400px;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-card h2 {
+            color: var(--border-color);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .form-group label {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-control {
+            background-color: var(--accent-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.75rem;
+            border-radius: 5px;
+        }
+
+        .form-control:focus {
+            background-color: var(--accent-color);
+            border-color: var(--border-color);
+            color: var(--text-color);
+            box-shadow: 0 0 0 0.2rem rgba(233, 69, 96, 0.25);
+        }
+
+        .form-control::placeholder {
+            color: rgba(234, 234, 234, 0.5);
+        }
+
+        .btn-login {
+            background-color: var(--border-color);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem;
+            border-radius: 5px;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-login:hover {
+            background-color: #c63449;
+            transform: scale(1.02);
+            color: white;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-left: 3px solid #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+            border-radius: 3px;
+            display: none;
+        }
+
+        .success-message {
+            color: #51cf66;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-left: 3px solid #51cf66;
+            background-color: rgba(81, 207, 102, 0.1);
+            border-radius: 3px;
+            display: none;
+        }
+
+        .admin-badge {
+            display: inline-block;
+            background-color: var(--border-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        .info-box {
+            background-color: var(--accent-color);
+            border-left: 4px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .info-box p {
+            margin: 0.5rem 0;
+            color: var(--text-color);
+        }
+
+        .info-box strong {
+            color: var(--border-color);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .back-link a {
+            color: var(--border-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: #c63449;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="../index.html"><img src="../images/steam.png" alt="Steam Clone" style="height: 40px;"></a>
+        <span class="navbar-text text-white ml-auto">
+            Admin Login
+        </span>
+    </nav>
+
+    <div class="container-login">
+        <div class="login-card">
+            <h2>Admin Panel <span class="admin-badge">ADMIN</span></h2>
+            
+            <div class="info-box">
+                <p><strong>Demo Credentials:</strong></p>
+                <p>Username: <code>admin</code></p>
+                <p>Password: <code>admin123</code></p>
+            </div>
+
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <form onsubmit="loginAdmin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                </div>
+
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+
+            <div class="back-link">
+                <a href="../index.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer bg-dark text-white" style="margin-top: auto;">
+        <div class="container text-center py-3">
+            <p>&copy; 2025 Game Arena. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        async function loginAdmin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error-message');
+            const successDiv = document.getElementById('success-message');
+
+            // Clear messages
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    // Ensure cookies (session) are sent/accepted for same-origin
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userName: username,
+                        pw: password
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Check if user is admin (ID 1 or username 'admin')
+                    if (data.user.id === 1 || data.user.userName === 'admin') {
+                        // Store admin user info in localStorage for persistence across pages
+                        localStorage.setItem('adminUser', JSON.stringify(data.user));
+                        successDiv.textContent = 'Login successful! Redirecting to admin dashboard...';
+                        successDiv.style.display = 'block';
+                        setTimeout(() => {
+                            window.location.href = './admin-dashboard.html';
+                        }, 1500);
+                    } else {
+                        errorDiv.textContent = 'This account does not have admin privileges. Please use the admin account.';
+                        errorDiv.style.display = 'block';
+                        // Logout this user (include credentials so server sees the session)
+                        await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' });
+                    }
+                } else {
+                    errorDiv.textContent = data.error || 'Login failed. Please check your credentials.';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorDiv.textContent = 'An error occurred during login. Please try again.';
+                errorDiv.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

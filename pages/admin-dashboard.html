@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../styles/admin-dashboard.css">
+    <link rel="icon" href="../images/icons/ic.png" type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="../index.html"><img src="../images/steam.png" alt="Steam Clone" style="height: 40px;"></a>
+        <span class="navbar-text text-white ml-auto">
+            Admin Panel
+            <button class="btn btn-sm btn-outline-light ml-3" onclick="logout()">Logout</button>
+        </span>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2">
+                <div class="list-group">
+                    <button class="list-group-item list-group-item-action active" onclick="switchTab('dashboard')">
+                        📊 Dashboard
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="switchTab('users')">
+                        👥 Manage Users
+                    </button>
+                    <button class="list-group-item list-group-item-action" onclick="switchTab('games')">
+                        🎮 Manage Games
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10">
+                <!-- Dashboard Tab -->
+                <div id="dashboard-tab" class="tab-content">
+                    <h2>Dashboard Statistics</h2>
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Users</h5>
+                                    <h2 id="stat-users">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Games</h5>
+                                    <h2 id="stat-games">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Purchases</h5>
+                                    <h2 id="stat-purchases">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <div class="card-body">
+                                    <h5 class="card-title">Total Revenue</h5>
+                                    <h2 id="stat-revenue">$0</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent activity -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Recent Users</h5>
+                                    <ul id="recent-users-list" class="list-group list-group-flush">
+                                        <li class="list-group-item">Loading...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Recent Purchases</h5>
+                                    <ul id="recent-purchases-list" class="list-group list-group-flush">
+                                        <li class="list-group-item">Loading...</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Tab -->
+                <div id="users-tab" class="tab-content" style="display:none;">
+                    <h2>User Management</h2>
+                    <div class="table-responsive mt-4">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Date of Birth</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <tr>
+                                    <td colspan="7" class="text-center">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Games Tab -->
+                <div id="games-tab" class="tab-content" style="display:none;">
+                    <h2>Game Management</h2>
+                    <button class="btn btn-primary mb-3" onclick="showAddGameForm()">+ Add New Game</button>
+                    
+                    <!-- Add Game Form (Hidden) -->
+                    <div id="add-game-form" class="card mb-4" style="display:none;">
+                        <div class="card-body">
+                            <h5 class="card-title">Add New Game</h5>
+                            <form onsubmit="addGame(event)">
+                                <div class="form-group">
+                                    <label>Game Name</label>
+                                    <input type="text" class="form-control" id="game-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Price ($)</label>
+                                    <input type="number" class="form-control" id="game-price" step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <input type="text" class="form-control" id="game-category" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Image URL</label>
+                                    <input type="text" class="form-control" id="game-image" required>
+                                </div>
+                                <button type="submit" class="btn btn-success">Add Game</button>
+                                <button type="button" class="btn btn-secondary" onclick="hideAddGameForm()">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive mt-4">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="games-table-body">
+                                <tr>
+                                    <td colspan="5" class="text-center">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../JsScripts/admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,18 +1,17 @@
 from flask import Flask, send_from_directory, abort, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import sys
 from datetime import datetime
 
-# Get the root directory
+
 try:
     ROOT = os.path.dirname(os.path.abspath(__file__))
 except NameError:
     ROOT = os.path.abspath(os.getcwd())
 
-# Initialize Flask application
+
 def create_app():
     try:
         # Create Flask app
@@ -31,11 +30,7 @@ def create_app():
 app = create_app()
 db = SQLAlchemy(app)
 
-# Configure session
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_PERMANENT'] = False
-app.config['SESSION_USE_SIGNER'] = True
-Session(app)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -166,6 +161,22 @@ def init_db():
         try:
             db.create_all()
             print("Database tables created successfully")
+            
+            # Create default admin user if it doesn't exist
+            admin_exists = User.query.filter_by(userName='admin').first()
+            if not admin_exists:
+                admin_user = User(
+                    userName='admin',
+                    userFirstName='Admin',
+                    userLastName='User',
+                    DateOfBirth='1990-01-01',
+                    email='admin@gamearena.com',
+                    password_hash=generate_password_hash('admin123'),
+                )
+                db.session.add(admin_user)
+                db.session.commit()
+                print("Admin user created: username=admin, password=admin123")
+            
             # Seed games if not exist
             if Game.query.count() == 0:
                 games_data = [
@@ -192,6 +203,18 @@ def init_db():
             return False
     return True
 
+
+# Helper to check admin privileges
+def is_admin_user(user):
+    """Return True if the given User object should be considered an admin.
+
+    This accepts the original convention (id == 1) for backwards compatibility
+    and also treats any user with userName 'admin' as an admin.
+    """
+    if not user:
+        return False
+    return user.id == 1 or (hasattr(user, 'userName') and (user.userName == 'admin'))
+
 # Initialize database tables
 init_db()
 
@@ -201,6 +224,10 @@ def index():
 
 @app.route('/<path:filepath>')
 def serve_file(filepath):
+    # Don't catch API routes - let them be handled by their specific handlers
+    if filepath.startswith('api/'):
+        abort(404)
+    
     # Basic safety: disallow access to python files, hidden files or parent traversal
     if filepath.endswith('.py') or filepath.startswith('.') or '..' in filepath:
         abort(404)
@@ -223,6 +250,7 @@ def serve_file(filepath):
 
 @app.route('/api/login', methods=['POST'])
 def api_login():
+    print("DEBUG: /api/login called")
     data = request.get_json()
     if not data or 'userName' not in data or 'pw' not in data:
         return jsonify({'success': False, 'error': 'Invalid data'}), 400
@@ -233,6 +261,7 @@ def api_login():
         return jsonify({'success': False, 'error': 'Invalid credentials'}), 401
 
     session['user_id'] = user.id
+    print(f"DEBUG: User logged in: {user.userName}, id: {user.id}, session['user_id']: {session['user_id']}")
     return jsonify({'success': True, 'user': user.to_dict()}), 200
 
 @app.route('/api/logout', methods=['POST'])
@@ -494,10 +523,210 @@ def api_uninstall_game(purchase_id):
         db.session.rollback()
         return jsonify({'success': False, 'error': str(e)}), 500
 
+# ============ ADMIN API ENDPOINTS ============
+
+@app.route('/api/admin/users', methods=['GET'])
+def api_admin_users():
+    with open('d:/SteamClone-main/debug.log', 'a') as f:
+        f.write(f"api_admin_users called\n")
+        f.write(f"session: {dict(session)}\n")
+        f.write(f"'user_id' in session: {'user_id' in session}\n")
+    
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    
+    with open('d:/SteamClone-main/debug.log', 'a') as f:
+        f.write(f"user_id: {user_id}, user: {user}\n")
+        if user:
+            f.write(f"user.userName: {user.userName}\n")
+            f.write(f"is_admin_user(user): {is_admin_user(user)}\n")
+    
+    if not is_admin_user(user):
+        return jsonify({'error': 'Not authorized'}), 403
+    
+    users = User.query.all()
+    return jsonify([u.to_dict() for u in users])
+
+@app.route('/api/admin/users/<int:user_id>', methods=['DELETE'])
+def api_admin_delete_user(user_id):
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    admin = User.query.get(session['user_id'])
+    if not is_admin_user(admin):
+        return jsonify({'error': 'Not authorized'}), 403
+
+    # Prevent deleting the seeded admin account (by id or by username)
+    user_to_delete = User.query.get(user_id)
+    if user_to_delete and user_to_delete.userName == 'admin':
+        return jsonify({'error': 'Cannot delete admin user'}), 400
+    
+    try:
+        user = User.query.get(user_id)
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+        
+        # Delete related records
+        Purchase.query.filter_by(user_id=user_id).delete()
+        Message.query.filter(db.or_(Message.sender_id == user_id, Message.receiver_id == user_id)).delete()
+        Comment.query.filter_by(user_id=user_id).delete()
+        SharedGame.query.filter_by(user_id=user_id).delete()
+        
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/games', methods=['GET'])
+def api_admin_games():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    user = User.query.get(session['user_id'])
+    if not is_admin_user(user):
+        return jsonify({'error': 'Not authorized'}), 403
+    
+    games = Game.query.all()
+    return jsonify([g.to_dict() for g in games])
+
+@app.route('/api/admin/games', methods=['POST'])
+def api_admin_add_game():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    admin = User.query.get(session['user_id'])
+    if not is_admin_user(admin):
+        return jsonify({'error': 'Not authorized'}), 403
+    
+    data = request.get_json()
+    if not data or not all(k in data for k in ['name', 'price', 'category', 'image']):
+        return jsonify({'error': 'Missing required fields'}), 400
+    
+    try:
+        game = Game(
+            name=data['name'],
+            price=data['price'],
+            category=data['category'],
+            image=data['image']
+        )
+        db.session.add(game)
+        db.session.commit()
+        return jsonify({'success': True, 'game': game.to_dict()}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/games/<int:game_id>', methods=['PUT'])
+def api_admin_update_game(game_id):
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    admin = User.query.get(session['user_id'])
+    if not is_admin_user(admin):
+        return jsonify({'error': 'Not authorized'}), 403
+    
+    game = Game.query.get(game_id)
+    if not game:
+        return jsonify({'error': 'Game not found'}), 404
+    
+    data = request.get_json()
+    try:
+        if 'name' in data:
+            game.name = data['name']
+        if 'price' in data:
+            game.price = data['price']
+        if 'category' in data:
+            game.category = data['category']
+        if 'image' in data:
+            game.image = data['image']
+        
+        db.session.commit()
+        return jsonify({'success': True, 'game': game.to_dict()}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/games/<int:game_id>', methods=['DELETE'])
+def api_admin_delete_game(game_id):
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    admin = User.query.get(session['user_id'])
+    if not is_admin_user(admin):
+        return jsonify({'error': 'Not authorized'}), 403
+    
+    try:
+        game = Game.query.get(game_id)
+        if not game:
+            return jsonify({'error': 'Game not found'}), 404
+        
+        # Delete related records
+        Purchase.query.filter_by(game_id=game_id).delete()
+        Comment.query.filter_by(game_id=game_id).delete()
+        SharedGame.query.filter_by(game_id=game_id).delete()
+        
+        db.session.delete(game)
+        db.session.commit()
+        return jsonify({'success': True}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/admin/stats', methods=['GET'])
+def api_admin_stats():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+    
+    user = User.query.get(session['user_id'])
+    if not is_admin_user(user):
+        return jsonify({'error': 'Not authorized'}), 403
+    
+    try:
+        # Calculate total revenue from purchases
+        total_revenue = 0
+        purchases = Purchase.query.all()
+        for purchase in purchases:
+            total_revenue += purchase.game.price
+        
+        stats = {
+            'total_users': User.query.count(),
+            'total_games': Game.query.count(),
+            'total_purchases': Purchase.query.count(),
+            'total_revenue': float(total_revenue),
+            'total_messages': Message.query.count(),
+            'total_comments': Comment.query.count(),
+        }
+        return jsonify(stats), 200
+    except Exception as e:
+        print(f"Error calculating stats: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/admin/recent_purchases', methods=['GET'])
+def api_admin_recent_purchases():
+    if 'user_id' not in session:
+        return jsonify({'error': 'Not logged in'}), 401
+
+    admin = User.query.get(session['user_id'])
+    if not is_admin_user(admin):
+        return jsonify({'error': 'Not authorized'}), 403
+
+    try:
+        purchases = Purchase.query.order_by(Purchase.purchase_date.desc()).limit(10).all()
+        return jsonify([p.to_dict() for p in purchases]), 200
+    except Exception as e:
+        print(f"Error fetching recent purchases: {e}")
+        return jsonify({'error': str(e)}), 500
+
 def main():
     try:
         # Only run on localhost for faster debugging
-        app.run(host='127.0.0.1', port=5000, debug=True, use_reloader=False)
+        app.run(host='127.0.0.1', port=5000, debug=True, use_reloader=True)
     except Exception as e:
         print(f"Error starting Flask app: {e}")
         return 1
